@@ -6,8 +6,6 @@ C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\dotnet.native.9msu8ucn2h.wasm
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\dotnet.runtime.qrl1fuqt3c.js
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\dotnet.runtime.js.map
-C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\EventEase.Client.8kz5m9qqmc.pdb
-C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\EventEase.Client.uljoq83ir5.wasm
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\icudt_CJK.tjcz0u77k5.dat
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\icudt_EFIGS.tptq2av103.dat
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\icudt_no_CJK.lfu7j35m59.dat
@@ -216,7 +214,6 @@ C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\System.Diagnostics.StackTrace.ailofr3xg4.wasm.gz
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\System.Net.j0rb8fmqum.wasm.gz
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\System.Net.WebHeaderCollection.6toxm9clu5.wasm.gz
-C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\EventEase.Client.8kz5m9qqmc.pdb.gz
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\System.Runtime.grclbqoc80.wasm.gz
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\System.Runtime.CompilerServices.Unsafe.ja2wapc8ts.wasm.gz
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\System.Linq.bi0wcqo6qy.wasm.gz
@@ -397,7 +394,6 @@ C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\System.Xml.XmlDocument.q8ihts3lf6.wasm.gz
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\System.IO.FileSystem.DriveInfo.21bnaui2ta.wasm.gz
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\blazor.webassembly.js.gz
-C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\EventEase.Client.uljoq83ir5.wasm.gz
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\System.Diagnostics.FileVersionInfo.4f475qbfex.wasm.gz
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\System.Xml.Serialization.m25ww1xmlb.wasm.gz
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\System.ComponentModel.Primitives.nl2ixrxcp7.wasm.gz
@@ -1014,9 +1010,6 @@ C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\obj\Debug\net9.0
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\obj\Debug\net9.0\compressed\mtri3v3odk-tjcz0u77k5.gz
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\obj\Debug\net9.0\compressed\t03my9how4-tptq2av103.gz
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\obj\Debug\net9.0\compressed\roz9rl4xvk-lfu7j35m59.gz
-C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\obj\Debug\net9.0\compressed\xnkuozrmmo-uljoq83ir5.gz
-C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\obj\Debug\net9.0\compressed\1jq5wdt3xl-8kz5m9qqmc.gz
-C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\obj\Debug\net9.0\compressed\q2fqm54c4o-ewzita5h87.gz
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\obj\Debug\net9.0\staticwebassets.development.json
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\obj\Debug\net9.0\staticwebassets.build.endpoints.json
@@ -1031,3 +1024,11 @@ C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\obj\Debug\net9.0
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\obj\Debug\net9.0\refint\EventEase.Client.dll
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\obj\Debug\net9.0\EventEase.Client.pdb
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\obj\Debug\net9.0\ref\EventEase.Client.dll
+c:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\EventEase.Client.hdsmoj1d4j.pdb
+c:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\EventEase.Client.z56r623i05.wasm
+c:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\EventEase.Client.hdsmoj1d4j.pdb.gz
+c:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\bin\Debug\net9.0\wwwroot\_framework\EventEase.Client.z56r623i05.wasm.gz
+c:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\obj\Debug\net9.0\EventEase.Client.sourcelink.json
+c:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\obj\Debug\net9.0\compressed\xnkuozrmmo-z56r623i05.gz
+c:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\obj\Debug\net9.0\compressed\1jq5wdt3xl-hdsmoj1d4j.gz
+c:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase.Client\obj\Debug\net9.0\compressed\q2fqm54c4o-3sbr5z06mb.gz

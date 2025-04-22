@@ -117,3 +117,4 @@ C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase\obj\Debug\net9.0\refint
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase\obj\Debug\net9.0\EventEase.pdb
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase\obj\Debug\net9.0\EventEase.genruntimeconfig.cache
 C:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase\obj\Debug\net9.0\ref\EventEase.dll
+c:\Users\Jan Kuchnia\coursera\blazor\EventEase\EventEase\obj\Debug\net9.0\EventEase.sourcelink.json

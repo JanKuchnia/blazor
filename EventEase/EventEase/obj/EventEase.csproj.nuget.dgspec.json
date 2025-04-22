@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jan Kuchnia\\coursera\\blazor\\EventEase\\EventEase\\EventEase.csproj": {}
+    "c:\\Users\\Jan Kuchnia\\coursera\\blazor\\EventEase\\EventEase\\EventEase.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jan Kuchnia\\coursera\\blazor\\EventEase\\EventEase.Client\\EventEase.Client.csproj": {
+    "c:\\Users\\Jan Kuchnia\\coursera\\blazor\\EventEase\\EventEase.Client\\EventEase.Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jan Kuchnia\\coursera\\blazor\\EventEase\\EventEase.Client\\EventEase.Client.csproj",
+        "projectUniqueName": "c:\\Users\\Jan Kuchnia\\coursera\\blazor\\EventEase\\EventEase.Client\\EventEase.Client.csproj",
         "projectName": "EventEase.Client",
-        "projectPath": "C:\\Users\\Jan Kuchnia\\coursera\\blazor\\EventEase\\EventEase.Client\\EventEase.Client.csproj",
+        "projectPath": "c:\\Users\\Jan Kuchnia\\coursera\\blazor\\EventEase\\EventEase.Client\\EventEase.Client.csproj",
         "packagesPath": "C:\\Users\\Jan Kuchnia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jan Kuchnia\\coursera\\blazor\\EventEase\\EventEase.Client\\obj\\",
+        "outputPath": "c:\\Users\\Jan Kuchnia\\coursera\\blazor\\EventEase\\EventEase.Client\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Jan Kuchnia\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -92,14 +92,14 @@
         }
       }
     },
-    "C:\\Users\\Jan Kuchnia\\coursera\\blazor\\EventEase\\EventEase\\EventEase.csproj": {
+    "c:\\Users\\Jan Kuchnia\\coursera\\blazor\\EventEase\\EventEase\\EventEase.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jan Kuchnia\\coursera\\blazor\\EventEase\\EventEase\\EventEase.csproj",
+        "projectUniqueName": "c:\\Users\\Jan Kuchnia\\coursera\\blazor\\EventEase\\EventEase\\EventEase.csproj",
         "projectName": "EventEase",
-        "projectPath": "C:\\Users\\Jan Kuchnia\\coursera\\blazor\\EventEase\\EventEase\\EventEase.csproj",
+        "projectPath": "c:\\Users\\Jan Kuchnia\\coursera\\blazor\\EventEase\\EventEase\\EventEase.csproj",
         "packagesPath": "C:\\Users\\Jan Kuchnia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jan Kuchnia\\coursera\\blazor\\EventEase\\EventEase\\obj\\",
+        "outputPath": "c:\\Users\\Jan Kuchnia\\coursera\\blazor\\EventEase\\EventEase\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Jan Kuchnia\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -114,8 +114,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\Jan Kuchnia\\coursera\\blazor\\EventEase\\EventEase.Client\\EventEase.Client.csproj": {
-                "projectPath": "C:\\Users\\Jan Kuchnia\\coursera\\blazor\\EventEase\\EventEase.Client\\EventEase.Client.csproj"
+              "c:\\Users\\Jan Kuchnia\\coursera\\blazor\\EventEase\\EventEase.Client\\EventEase.Client.csproj": {
+                "projectPath": "c:\\Users\\Jan Kuchnia\\coursera\\blazor\\EventEase\\EventEase.Client\\EventEase.Client.csproj"
               }
             }
           }

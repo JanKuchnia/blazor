@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AS1HcWkaLug=",
+  "dgSpecHash": "IfNoRfYcsg0=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Jan Kuchnia\\coursera\\blazor\\EventEase\\EventEase.Client\\EventEase.Client.csproj",
+  "projectFilePath": "c:\\Users\\Jan Kuchnia\\coursera\\blazor\\EventEase\\EventEase.Client\\EventEase.Client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Jan Kuchnia\\.nuget\\packages\\microsoft.aspnetcore.authorization\\9.0.3\\microsoft.aspnetcore.authorization.9.0.3.nupkg.sha512",
     "C:\\Users\\Jan Kuchnia\\.nuget\\packages\\microsoft.aspnetcore.components\\9.0.3\\microsoft.aspnetcore.components.9.0.3.nupkg.sha512",
