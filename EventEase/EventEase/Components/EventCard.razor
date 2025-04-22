@@ -1,0 +1,96 @@
+@using EventEase.Models
+
+@if (Event is null)
+{
+    <div class="alert alert-warning">Event data is not available</div>
+    return;
+}
+
+<div class="event-card">
+    <h3>@(!string.IsNullOrEmpty(Event.Name) ? Event.Name : "Untitled Event")</h3>
+    <div class="event-details">
+        <p><i class="bi bi-calendar"></i> @FormatDate(Event.Date)</p>
+        <p><i class="bi bi-geo-alt"></i> @(!string.IsNullOrEmpty(Event.Location) ? Event.Location : "Location TBD")</p>
+    </div>
+    <p class="description">@(!string.IsNullOrEmpty(Event.Description) ? Event.Description : "No description available")</p>
+    <div class="card-actions">
+        <button class="btn btn-primary" @onclick="HandleViewDetails">View Details</button>
+        <button class="btn btn-outline-primary" @onclick="HandleRegister" disabled="@(!IsValidEvent())">Register</button>
+    </div>
+</div>
+
+<style>
+    .event-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 1rem 0;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .event-details {
+        color: #666;
+        margin: 0.5rem 0;
+    }
+
+    .card-actions {
+        margin-top: 1rem;
+        display: flex;
+        gap: 0.5rem;
+    }
+</style>
+
+@code {
+    [Parameter]
+    public Event Event { get; set; } = default!;
+
+    [Parameter]
+    public EventCallback<Event> OnViewDetails { get; set; }
+
+    [Parameter]
+    public EventCallback<Event> OnRegister { get; set; }
+
+    private string FormatDate(DateTime date)
+    {
+        return date != default ? date.ToString("MMMM dd, yyyy") : "Date TBD";
+    }
+
+    private bool IsValidEvent()
+    {
+        if (Event is null) return false;
+        return !string.IsNullOrEmpty(Event.Name) 
+            && !string.IsNullOrEmpty(Event.Location) 
+            && Event.Date > DateTime.Now;
+    }
+
+    private async Task HandleViewDetails()
+    {
+        try
+        {
+            await OnViewDetails.InvokeAsync(Event);
+        }
+        catch (Exception ex)
+        {
+            // Log the error or handle it appropriately
+            Console.Error.WriteLine($"Error in ViewDetails: {ex.Message}");
+        }
+    }
+
+    private async Task HandleRegister()
+    {
+        if (!IsValidEvent())
+        {
+            return;
+        }
+
+        try
+        {
+            await OnRegister.InvokeAsync(Event);
+        }
+        catch (Exception ex)
+        {
+            // Log the error or handle it appropriately
+            Console.Error.WriteLine($"Error in Register: {ex.Message}");
+        }
+    }
+}

@@ -1,0 +1,221 @@
+﻿@page "/"
+@using EventEase.Models
+@using EventEase.Services
+@using EventEase.Components
+@using Microsoft.AspNetCore.Components.Web
+
+<PageTitle>Welcome to EventEase</PageTitle>
+
+<div class="container">
+    <div class="hero-section text-center">
+        <h1 class="display-4">Welcome to EventEase</h1>
+        <p class="lead">Discover and join amazing events in your area</p>
+    </div>
+
+    @if (loading)
+    {
+        <div class="loading-spinner">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <i class="bi bi-calendar-check"></i>
+                    <h3>@upcomingEventsCount</h3>
+                    <p>Upcoming Events</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <i class="bi bi-people"></i>
+                    <h3>@registeredEventsCount</h3>
+                    <p>Your Registered Events</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <i class="bi bi-calendar-date"></i>
+                    <h3>@nextEventDays</h3>
+                    <p>Days Until Next Event</p>
+                </div>
+            </div>
+        </div>
+
+        @if (nextEvent != null)
+        {
+            <div class="next-event-section mt-5">
+                <h2>Your Next Event</h2>
+                <EventCard Event="nextEvent"
+                          OnViewDetails="@(async (e) => await NavigateToDetails(e))"
+                          OnRegister="@(async (e) => await NavigateToRegistration(e))" />
+            </div>
+        }
+
+        <div class="quick-actions mt-5">
+            <h2>Quick Actions</h2>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <button class="btn btn-primary btn-lg w-100" @onclick="ViewAllEvents">
+                        <i class="bi bi-calendar2-week"></i> Browse All Events
+                    </button>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-outline-primary btn-lg w-100" @onclick="ViewMyEvents">
+                        <i class="bi bi-person-badge"></i> View My Registrations
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .hero-section {
+        padding: 3rem 0;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .stats-card {
+        background: white;
+        border-radius: 1rem;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+    }
+
+    .stats-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .stats-card i {
+        font-size: 2.5rem;
+        color: var(--bs-primary);
+        margin-bottom: 1rem;
+    }
+
+    .stats-card h3 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        color: var(--bs-dark);
+    }
+
+    .stats-card p {
+        color: var(--bs-secondary);
+        margin: 0;
+    }
+
+    .next-event-section {
+        background: white;
+        border-radius: 1rem;
+        padding: 2rem;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .quick-actions .btn {
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .quick-actions .btn i {
+        font-size: 1.25rem;
+    }
+
+    .loading-spinner {
+        display: flex;
+        justify-content: center;
+        padding: 3rem;
+    }
+</style>
+
+@code {
+    [Inject]
+    public NavigationManager NavigationManager { get; set; } = default!;
+
+    [Inject]
+    public IUserSessionService UserSession { get; set; } = default!;
+
+    private bool loading = true;
+    private int upcomingEventsCount = 0;
+    private int registeredEventsCount = 0;
+    private int nextEventDays = 0;
+    private Event? nextEvent;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            loading = true;
+            await Task.Delay(500); // Simulating API call
+
+            // Get registered events
+            var registeredEvents = await UserSession.GetRegisteredEvents();
+            registeredEventsCount = registeredEvents.Count;
+
+            // Mock upcoming events count
+            upcomingEventsCount = new Random().Next(20, 50);
+
+            // Create a mock next event
+            if (registeredEvents.Any())
+            {
+                var nextEventId = registeredEvents.First();
+                nextEvent = new Event
+                {
+                    Id = nextEventId,
+                    Name = $"Event {nextEventId}",
+                    Date = DateTime.Now.AddDays(14),
+                    Location = "Convention Center, Seattle",
+                    Description = "Your next upcoming event!"
+                };
+                nextEventDays = (nextEvent.Date - DateTime.Now).Days;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Error loading dashboard: {ex.Message}");
+            throw;
+        }
+        finally
+        {
+            loading = false;
+        }
+    }
+
+    private void ViewAllEvents()
+    {
+        NavigationManager.NavigateTo("/events");
+    }
+
+    private void ViewMyEvents()
+    {
+        NavigationManager.NavigateTo("/events?view=registered");
+    }
+
+    private Task NavigateToDetails(Event evt)
+    {
+        if (evt?.Id > 0)
+        {
+            NavigationManager.NavigateTo($"/events/{evt.Id}");
+        }
+        return Task.CompletedTask;
+    }
+
+    private Task NavigateToRegistration(Event evt)
+    {
+        if (evt?.Id > 0)
+        {
+            NavigationManager.NavigateTo($"/events/{evt.Id}/register");
+        }
+        return Task.CompletedTask;
+    }
+}

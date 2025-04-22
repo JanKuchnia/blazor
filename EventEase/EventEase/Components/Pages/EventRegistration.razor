@@ -1,0 +1,249 @@
+@page "/events/{Id:int}/register"
+@using EventEase.Models
+@using EventEase.Services
+
+<PageTitle>Event Registration - EventEase</PageTitle>
+
+<ErrorBoundary>
+    <ChildContent>
+        <div class="registration-container">
+            <h1>Register for Event</h1>
+            
+            @if (loading)
+            {
+                <div class="loading-spinner">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            }
+            else if (currentEvent == null)
+            {
+                <div class="alert alert-warning">
+                    Event not found or no longer available.
+                    <button class="btn btn-primary mt-3" @onclick="NavigateToEvents">Back to Events</button>
+                </div>
+            }
+            else if (isRegistered)
+            {
+                <div class="alert alert-success">
+                    <h4>Registration Successful!</h4>
+                    <p>You are now registered for @currentEvent.Name.</p>
+                    <p>A confirmation email has been sent to @registration.Email</p>
+                    <div class="mt-3">
+                        <button class="btn btn-primary" @onclick="() => NavigateToEvents()">View All Events</button>
+                        <button class="btn btn-outline-primary ms-2" @onclick="() => NavigateBack()">Event Details</button>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="event-summary">
+                    <h3>@currentEvent.Name</h3>
+                    <p><i class="bi bi-calendar"></i> @currentEvent.Date.ToString("MMMM dd, yyyy")</p>
+                    <p><i class="bi bi-geo-alt"></i> @currentEvent.Location</p>
+                </div>
+
+                <EditForm Model="@registration" OnValidSubmit="HandleRegistration">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary class="alert alert-danger" />
+
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <InputText id="fullName" class="form-control" @bind-Value="registration.FullName" />
+                        <ValidationMessage For="@(() => registration.FullName)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <InputText id="email" type="email" class="form-control" @bind-Value="registration.Email" />
+                        <ValidationMessage For="@(() => registration.Email)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <InputText id="phone" class="form-control" @bind-Value="registration.Phone" />
+                        <ValidationMessage For="@(() => registration.Phone)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="specialRequirements">Special Requirements (Optional)</label>
+                        <InputTextArea id="specialRequirements" class="form-control" 
+                                     @bind-Value="registration.SpecialRequirements" rows="3" />
+                        <ValidationMessage For="@(() => registration.SpecialRequirements)" />
+                    </div>
+
+                    <div class="action-buttons">
+                        <button type="submit" class="btn btn-primary" disabled="@loading">
+                            @(loading ? "Processing..." : "Complete Registration")
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary" @onclick="NavigateBack">Back to Event</button>
+                    </div>
+                </EditForm>
+            }
+        </div>
+    </ChildContent>
+    <ErrorContent Context="ex">
+        <div class="alert alert-danger">
+            <h4>Error</h4>
+            <p>Sorry, an error occurred while processing your registration.</p>
+            @if (System.Diagnostics.Debugger.IsAttached)
+            {
+                <p>@ex.Message</p>
+            }
+        </div>
+    </ErrorContent>
+</ErrorBoundary>
+
+<style>
+    .registration-container {
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .event-summary {
+        background-color: #f8f9fa;
+        padding: 1rem;
+        border-radius: 8px;
+        margin: 1rem 0 2rem;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .validation-message {
+        color: #dc3545;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+    }
+
+    .loading-spinner {
+        display: flex;
+        justify-content: center;
+        padding: 2rem;
+    }
+</style>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; } = default!;
+
+    [Inject]
+    public IUserSessionService UserSession { get; set; } = default!;
+
+    private Event? currentEvent;
+    private Registration registration = new();
+    private bool loading = true;
+    private bool isRegistered = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            loading = true;
+            await Task.Delay(500); // Simulating API call
+
+            if (Id <= 0 || Id > 50) // Simulating invalid event IDs
+            {
+                currentEvent = null;
+                return;
+            }
+
+            currentEvent = new Event
+            {
+                Id = Id,
+                Name = $"Event {Id}",
+                Date = DateTime.Now.AddDays(30),
+                Location = "Convention Center, Seattle",
+                Description = "Join us for the biggest tech event of the year!"
+            };
+
+            registration.EventId = Id;
+
+            // Pre-fill email if user has registered before
+            var userEmail = await UserSession.GetUserEmail();
+            if (!string.IsNullOrEmpty(userEmail))
+            {
+                registration.Email = userEmail;
+            }
+
+            // Check if already registered
+            var registeredEvents = await UserSession.GetRegisteredEvents();
+            if (registeredEvents.Contains(Id))
+            {
+                isRegistered = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Error loading event {Id}: {ex.Message}");
+            throw;
+        }
+        finally
+        {
+            loading = false;
+        }
+    }
+
+    private async Task HandleRegistration()
+    {
+        if (currentEvent == null) return;
+
+        try
+        {
+            loading = true;
+            // Simulate API call
+            await Task.Delay(1000);
+
+            // Save user email for future pre-fill
+            await UserSession.SetUserEmail(registration.Email);
+            
+            // Mark event as registered
+            await UserSession.AddRegisteredEvent(Id);
+            
+            isRegistered = true;
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Error processing registration: {ex.Message}");
+            throw;
+        }
+        finally
+        {
+            loading = false;
+        }
+    }
+
+    private void NavigateBack()
+    {
+        NavigationManager.NavigateTo($"/events/{Id}");
+    }
+
+    private void NavigateToEvents()
+    {
+        NavigationManager.NavigateTo("/events");
+    }
+}

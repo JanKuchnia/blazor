@@ -1,0 +1,234 @@
+@page "/events/{Id:int}"
+@using EventEase.Models
+@using EventEase.Services
+
+<PageTitle>Event Details - EventEase</PageTitle>
+
+<ErrorBoundary>
+    <ChildContent>
+        @if (loading)
+        {
+            <div class="loading-spinner">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        }
+        else if (currentEvent == null)
+        {
+            <div class="error-container">
+                <div class="alert alert-warning">
+                    <h4>Event Not Found</h4>
+                    <p>Sorry, we couldn't find the event you're looking for.</p>
+                    <button class="btn btn-primary mt-3" @onclick="NavigateBack">Back to Events</button>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="event-details-container">
+                <h1>@currentEvent.Name</h1>
+                
+                @if (isRegistered)
+                {
+                    <div class="alert alert-success mb-4">
+                        <i class="bi bi-check-circle"></i> You are registered for this event
+                    </div>
+                }
+                
+                <div class="detail-section">
+                    <div class="detail-item">
+                        <i class="bi bi-calendar"></i>
+                        <span>@currentEvent.Date.ToString("MMMM dd, yyyy")</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="bi bi-geo-alt"></i>
+                        <span>@currentEvent.Location</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="bi bi-people"></i>
+                        <span>@(registeredCount) registered attendees</span>
+                    </div>
+                </div>
+
+                <div class="description-section">
+                    <h3>About This Event</h3>
+                    <p>@currentEvent.Description</p>
+                </div>
+
+                <div class="action-buttons">
+                    @if (!isRegistered && IsUpcoming(currentEvent))
+                    {
+                        <button class="btn btn-primary" @onclick="NavigateToRegistration">Register Now</button>
+                    }
+                    else if (isRegistered)
+                    {
+                        <button class="btn btn-outline-primary" @onclick="CancelRegistration">Cancel Registration</button>
+                    }
+                    <button class="btn btn-outline-secondary" @onclick="NavigateBack">Back to Events</button>
+                </div>
+            </div>
+        }
+    </ChildContent>
+    <ErrorContent Context="ex">
+        <div class="error-container">
+            <div class="alert alert-danger">
+                <h4>Error</h4>
+                <p>Sorry, an error occurred while loading the event details.</p>
+                @if (System.Diagnostics.Debugger.IsAttached)
+                {
+                    <p>@ex.Message</p>
+                }
+                <button class="btn btn-primary mt-3" @onclick="NavigateBack">Back to Events</button>
+            </div>
+        </div>
+    </ErrorContent>
+</ErrorBoundary>
+
+<style>
+    .event-details-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .detail-section {
+        margin: 2rem 0;
+    }
+
+    .detail-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0.5rem 0;
+        color: #666;
+    }
+
+    .description-section {
+        margin: 2rem 0;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .loading-spinner, .error-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 300px;
+    }
+
+    .error-container {
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .detail-item i {
+        font-size: 1.2rem;
+        width: 1.5rem;
+    }
+
+    .alert i {
+        margin-right: 0.5rem;
+    }
+</style>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; } = default!;
+
+    [Inject]
+    public IUserSessionService UserSession { get; set; } = default!;
+
+    private Event? currentEvent;
+    private bool loading = true;
+    private bool isRegistered;
+    private int registeredCount;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            loading = true;
+            await Task.Delay(500); // Simulating API call
+
+            if (Id <= 0 || Id > 50) // Simulating invalid event IDs
+            {
+                currentEvent = null;
+                return;
+            }
+
+            currentEvent = new Event
+            {
+                Id = Id,
+                Name = $"Event {Id}",
+                Date = DateTime.Now.AddDays(30),
+                Location = "Convention Center, Seattle",
+                Description = "Join us for the biggest tech event of the year! Network with industry leaders, attend workshops, and learn about the latest technologies."
+            };
+
+            var registeredEvents = await UserSession.GetRegisteredEvents();
+            isRegistered = registeredEvents.Contains(Id);
+
+            // Mock registered count - in a real app, this would come from a database
+            registeredCount = new Random().Next(10, 100);
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Error loading event {Id}: {ex.Message}");
+            throw;
+        }
+        finally
+        {
+            loading = false;
+        }
+    }
+
+    private bool IsUpcoming(Event evt)
+    {
+        return evt.Date > DateTime.Now;
+    }
+
+    private async Task CancelRegistration()
+    {
+        try
+        {
+            loading = true;
+            // Simulate API call
+            await Task.Delay(500);
+
+            var registeredEvents = await UserSession.GetRegisteredEvents();
+            registeredEvents.Remove(Id);
+            isRegistered = false;
+            registeredCount--;
+
+            // In a real app, this would update the server
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Error canceling registration: {ex.Message}");
+            throw;
+        }
+        finally
+        {
+            loading = false;
+        }
+    }
+
+    private void NavigateToRegistration()
+    {
+        NavigationManager.NavigateTo($"/events/{Id}/register");
+    }
+
+    private void NavigateBack()
+    {
+        NavigationManager.NavigateTo("/events");
+    }
+}
